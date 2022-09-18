@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block head %}
+    <style>
+    table, td, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    </style>
+{% endblock head %}
+
+{% block content %}
+        <a href="{% url 'fileInput' %}">File Input Page</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <h1>Home Page</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+
+        <h2>Day</h2>
+        {% for day in days %}
+            <input type="radio" name="requested_day" value="{{ day }}"> {{ day }}
+        {% endfor %}
+
+        <h2>Timings</h2>
+            <ul>
+                {% for i in numbers %}
+                        <li> <input type="checkbox" value="clicked" name="c{{ i }}"> {{ i }}:00 - {{ i }}:50 </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" name="get-details" value="get-details">Get Details</button>
+            <br><br>
+        </form>
+
+        {% if eligibleEmps %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+            {% for emp in eligibleEmps %}
+            <tr>
+                {% for i in emp %}
+                <td>{{ i }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+{% endblock content %}

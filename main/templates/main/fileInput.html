@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}File Input{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'home' %}">Home Page</a>
+    <h1>File Input Page</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="document">
+        <button type="submit" name="fileUpload" value="fileUpload">Upload File</button>
+    </form>
+{% endblock content %}
